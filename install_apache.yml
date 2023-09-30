@@ -6,4 +6,9 @@
 
   - name: install apache webserver package
     yum:
+      update_cache: yes 
+
+  - name: install apache webserver package
+    yum:
       name: httpd 
+      state: latest
