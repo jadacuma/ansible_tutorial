@@ -1,0 +1,31 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: Install apache webserver package
+    yum:
+      update_cache: yes 
+
+  - name: Update apache webserver package
+    yum:
+      name: httpd 
+      state: latest
+
+  - name: Start web server
+    service:
+      name: httpd
+      state: started
+
+  - name: Allow incoming HTTP traffic to the local host
+    include_role:
+      name: rhel-system-roles.firewall
+
+    vars:
+      firewall:
+        - port: 80/tcp
+          service: http
+          state: enabled
+          runtime: true
+          permanent: true
