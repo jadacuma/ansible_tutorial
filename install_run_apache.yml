@@ -17,15 +17,3 @@
     service:
       name: httpd
       state: started
-
-  - name: Allow incoming HTTP traffic to the local host
-    include_role:
-      name: rhel-system-roles.firewall
-
-    vars:
-      firewall:
-        - port: 80/tcp
-          service: http
-          state: enabled
-          runtime: true
-          permanent: true
